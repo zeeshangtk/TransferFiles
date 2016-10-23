@@ -4,16 +4,13 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/transferfiles/handlers"
 )
 
 type routerConfig struct {
 	Methods     []string
 	URL         string
 	HandlerFunc func(w http.ResponseWriter, r *http.Request)
-}
-
-func healthCheckHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Transfer file is up and running"))
 }
 
 func GetRouter() *mux.Router {
@@ -31,7 +28,7 @@ func getRoutes() *[]routerConfig {
 		routerConfig{
 			Methods:     []string{"GET"},
 			URL:         "/healthcheck",
-			HandlerFunc: healthCheckHandler,
+			HandlerFunc: handlers.HealthCheckHandler,
 		},
 	}
 	return &routers
