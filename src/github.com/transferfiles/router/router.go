@@ -30,6 +30,16 @@ func getRoutes() *[]routerConfig {
 			URL:         "/healthcheck",
 			HandlerFunc: handlers.HealthCheckHandler,
 		},
+		routerConfig{
+			Methods:     []string{"POST"},
+			URL:         "/receiveFiles",
+			HandlerFunc: handlers.ReceiverHandler,
+		},
+		routerConfig{
+			Methods:     []string{"POST"},
+			URL:         "/sendFiles",
+			HandlerFunc: handlers.SendFileHandler,
+		},
 	}
 	return &routers
 }

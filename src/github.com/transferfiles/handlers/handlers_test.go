@@ -42,7 +42,7 @@ Content-Disposition: form-data; name="textb"
 --MyBoundary--
 `
 
-func TestUploadHandler(t *testing.T) {
+func TestReceiverHandler(t *testing.T) {
 	testBody := regexp.MustCompile("\n").ReplaceAllString(message, "\r\n")
 	b := strings.NewReader(testBody)
 	r := multipart.NewReader(b, boundary)
@@ -52,6 +52,6 @@ func TestUploadHandler(t *testing.T) {
 		Method:        "POST",
 		MultipartForm: f,
 	}
-	handlers.UploadHandler(w, request)
+	handlers.ReceiverHandler(w, request)
 	assert.Equal(t, "Files uploaded successfully:", w.Body.String())
 }
