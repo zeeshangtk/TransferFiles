@@ -2,10 +2,12 @@ package testutils
 
 import (
 	"bytes"
-	"github.com/urfave/negroni"
 	"io"
 	"net/http"
 	"net/http/httptest"
+	"os"
+
+	"github.com/urfave/negroni"
 
 	"github.com/transferfiles/router"
 )
@@ -40,4 +42,11 @@ func (tr *TestRequest) Run() *TestResponse {
 		Code: w.Code,
 		Body: w.Body,
 	}
+}
+
+func CheckIfFileExists(filepath string) bool {
+	if _, err := os.Stat(filepath); os.IsNotExist(err) {
+		return false
+	}
+	return true
 }
